@@ -592,8 +592,8 @@ down_timeout({shutdown, brutal_kill}, grace, MRefs) ->
     exits(kill, MRefs),
     {make_ref(), brutal_kill};
 down_timeout({shutdown, Shutdown}, grace, MRefs) ->
-    exits(shutdown, MRefs),
-    {erlang:start_timer(Shutdown, self(), brutal_kill), shutdown};
+    exits(kill, MRefs),
+    {erlang:start_timer(Shutdown, self(), brutal_kill), brutal_kill};
 down_timeout(brutal_kill, shutdown, MRefs) ->
     exits(kill, MRefs),
     {make_ref(), shutdown}.
